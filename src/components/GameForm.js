@@ -213,7 +213,7 @@ class GameForm extends Component {
           <select
             name="publisher"
             value={data.publisher}
-            onChange={this.handleNumberChange}
+            onChange={this.handleChange}
           >
             <option value="0">Choose Publisher</option>
             {this.props.publishers.map(publisher => (
