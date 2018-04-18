@@ -17,10 +17,11 @@ const TopNavigation = ({ isAuthenticated, logout, isAdmin }) => {
           <i className="icon plus" />Add New Item
         </NavLink>
       )}
-      <NavLink exact to="/publishers" className="item">
-        <i className="icon industry" />Manage publishers
-      </NavLink>
-
+      {isAdmin && (
+        <NavLink exact to="/publishers" className="item">
+          <i className="icon industry" />Manage publishers
+        </NavLink>
+      )}
       {isAuthenticated ? (
         <div className="right menu">
           <a className="item" onClick={logout}>

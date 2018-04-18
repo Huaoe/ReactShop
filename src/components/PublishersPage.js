@@ -1,20 +1,20 @@
 import React from "react";
+import PropTypes from "prop-types";
 import PublishersForm from "./PublishersForm";
+import AdminRoute from "./AdminRoute";
 //import PropTypes from "prop-types";
 import api from "../api";
 
 class PublishersPage extends React.Component {
-  state= {
+  state = {
     publishers: [],
-    selectedPublisher:{}
+    selectedPublisher: {}
   };
 
   componentDidMount() {
-
     api.publishers
       .fetchAll()
       .then(publishers => this.setState({ publishers: publishers }));
-
   }
 
   //***********
@@ -32,13 +32,16 @@ class PublishersPage extends React.Component {
   };
 
   updatePublisher = publisher =>
-    api.publishers.update(publisher).then(res =>
-      this.setState({
-        publishers: this.state.publishers.map(
-          item => (item._id === publisher._id ? publisher : item)
-        )
-      })
-    ).then(() => this.setState({selectedPublisher:{}}));
+    api.publishers
+      .update(publisher)
+      .then(res =>
+        this.setState({
+          publishers: this.state.publishers.map(
+            item => (item._id === publisher._id ? publisher : item)
+          )
+        })
+      )
+      .then(() => this.setState({ selectedPublisher: {} }));
 
   addPublisher = publisher => {
     console.log(publisher);
@@ -62,18 +65,31 @@ class PublishersPage extends React.Component {
   render() {
     return (
       <div className="ui container">
-        <div className="six wide column">
-          <PublishersForm
-            publishers={this.state.publishers}
-            edit={this.selectPublisherForEditing}
-            save={this.savePublisher}
-            deletePublisher={this.deletePublisher}
-            publisher={this.state.selectedPublisher|| {}}
-          />
-        </div>
+        <AdminRoute
+          path="/publishers/"
+          user={this.props.user}
+          render={() => (
+            <div className="six wide column">
+              <PublishersForm
+                publishers={this.state.publishers}
+                edit={this.selectPublisherForEditing}
+                save={this.savePublisher}
+                deletePublisher={this.deletePublisher}
+                publisher={this.state.selectedPublisher || {}}
+              />
+            </div>
+          )}
+        />
       </div>
     );
   }
 }
-
+PublishersPage.propTypes = {
+  user: PropTypes.shape(
+    {
+      token:PropTypes.string,
+      role:PropTypes.string.isRequired
+    }
+  )
+};
 export default PublishersPage;
