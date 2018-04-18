@@ -8,7 +8,7 @@ const AdminRoute = ({ user, render, ...rest }) => (
       user.token && user.role === "admin" ? (
         render(props)
       ) : (
-        <Redirect to="/Games" />
+        <Redirect to="/items" />
       )
     }
   />

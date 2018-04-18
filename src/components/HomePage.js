@@ -2,7 +2,7 @@ import React from 'react'
 
 const HomePage  = () => (
     <div >
-<h1>Welcome to my items shop</h1>
+<h1>Welcome to my shop</h1>
 <h3><i>A sample React application</i></h3>
 <h3>Find code at github : </h3>
 <p>

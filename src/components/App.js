@@ -93,7 +93,7 @@ class App extends React.Component {
           path="/login"
           render={props => <LoginPage {...props} login={this.login} />}
         />
-        <Route path="/game/:_id" exact component={ShowGamePage} />
+        <Route path="/item/:_id" exact component={ShowGamePage} />
         <Route path="/publishers" render={props => <PublishersPage {...props} user={this.state.user} />}/>
       </div>
     );
